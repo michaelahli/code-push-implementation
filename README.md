@@ -1,3 +1,3 @@
 ### CODEPUSH IMPLEMENTATION
 
-@author by Michael Ahli
+@authored by Michael Ahli
