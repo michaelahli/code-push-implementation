@@ -1,10 +1,24 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, View, Text, Image, Button} from 'react-native';
+import CodePush from 'react-native-code-push';
+
 
 const App = ()=>{
   const [data,setData] = useState({
     display:'none',
   });
+
+  useEffect(()=>{    
+    CodePush.sync({
+      installMode: CodePush.InstallMode.IMMEDIATE
+    },
+    syncWithCodePush,
+    null)
+  },[]);
+
+  const syncWithCodePush = (status)=>{
+    console.log(status)
+  }
 
   const onClick = ()=>{
     if (data.display == 'none'){
@@ -121,4 +135,8 @@ const App = ()=>{
   )
 }
 
-export default App;
+const CODE_PUSH_OPTIONS = {
+  checkFrequency: CodePush.CheckFrequency.ON_APP_START
+};
+
+export default CodePush(CODE_PUSH_OPTIONS)(App);
